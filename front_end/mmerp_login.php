@@ -39,7 +39,7 @@ Modified by: gmh  on: 12/03/16
              <input type="password" class="form-control" name="password" id="pwd_entry"
                     required="required" />
              </div>
-                 <input type="submit" class="btn btn-default" value="Log In" />
+                 <input type="submit" value="Log In" />
          </fieldset>
         </div>
         </form>

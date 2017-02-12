@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+</head>
+<body>
+<div class="container-fluid" id="back">
+  <form action="mmerp.php" method="post">
+    <h1>MMERP</h1>
+    <input type="text" name="username" placeholder="Username" required="required">
+    <input type="password" name="password" placeholder="Password" required="required">
+    <input type="submit" value="Login">
+  </form>
+</div>
+<style media="screen">
+::-webkit-input-placeholder { /* Chrome */
+  color: white;
+}
+html,body,.container-fluid
+{
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+  color:white;
+
+}
+.container-fluid
+{
+  background-size: cover;
+  background-position: center;
+}
+form
+{
+  width: 150px;
+  margin-left: 50px;
+  margin-top: 400px;
+}
+form>h1
+{
+  margin-bottom: 17px;
+  padding: 0px;
+}
+input[type="text"],input[type="password"]
+{
+  border: none;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  border-bottom: 3px solid white;
+  margin-bottom: 15px;
+  width: 100%;
+}
+input[type="submit"]
+{
+  border: none;
+  background: transparent;
+  padding: 0px;
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+}
+
+</style>
+</div>
+<script type="text/javascript">
+  var screen = Math.floor(Math.random() * 6) + 1;
+  console.log(screen);
+  back = document.getElementById("back");
+  switch (screen) {
+    case 1:
+        back.style.backgroundImage = "url('seals-min.jpg')";
+        break;
+    case 2:
+        back.style.backgroundImage = "url('seal2-min.jpg')";
+        break;
+    case 3:
+        back.style.backgroundImage = "url('otter-min.jpg')";
+        break;
+    case 4:
+        back.style.backgroundImage = "url('grwhale-min.jpg')";
+        break;
+    case 5:
+        back.style.backgroundImage = "url('whale-min.jpg')";
+        break;
+    case 6:
+        back.style.backgroundImage = "url('shark-min.jpg')";
+        break;
+}
+
+</script>
+</body>
+</html>

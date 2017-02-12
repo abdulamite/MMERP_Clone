@@ -1,43 +1,18 @@
 <?php
 
-/*--------
-get_report_info.php
+      // function:  create_beach_dropdown
+      // purpose: expects Oracle username and password
+      //     returns nothing but builds a dropdorn of current
+      //     beach info
 
-Guthrie Hayward (gmh234)
-Nathan Ortolan (ndo28)
-Becky Williams (rjw125)
-Abdul Shaikh (ats234)
-
-Created by Abdul, Guthrie and Rebecca on 11/5/16
-
-Modified by: rjw, ats  on: 11/13/16
-Modified by: rjw  on: 11/14/16
-Modified by: rjw  on: 11/20/16
-
-    function: get_report_info
-    purpose: expects an entered Oracle login and
-        password and mmerp username performs the following:
-        --queries the database for a list of beaches
-        --displays beach query to user as a dropdown
-        --queries the database for a list of added users (excluding user who
-                  logged in)
-        --displays added users query to user as a dropdown
-        --stores the selected beach_abbr to the POST array on submit
-        --stores the selected HSU_USERNAME to the POST array on submit
-        --optional go back to main menu on submit
-
-    uses: hsu_conn_sess
--------*/
-
-      function get_report_info($login, $username, $password)
+      function make_new_report($username, $password)
       {
-          $conn = hsu_conn_sess($login, $password);
+          $conn = hsu_conn_sess($username, $password)
 
           // here  ive connected
           ?>
-          <form class="form-inline" action="<?= htmlentities($_SERVER['PHP_SELF'],
+          <form class="new_report" action="<?= htmlentities($_SERVER['PHP_SELF'],
                                  ENT_QUOTES) ?>" method="post" id="new_report">
-          <div class="form-group">
           <fieldset>
             <legend>New Report</legend>
             <?php
@@ -69,9 +44,9 @@ Modified by: rjw  on: 11/20/16
               <?php
 
 
-                $user_query = "select HSU_USERNAME
+                $user_query = 'select HSU_USERNAME, USER_INITIALS
                                from USERS
-                               where HSU_USERNAME != :username and is_surveyor = 'Y'";
+                               where HSU_USERNAME != :username';
 
                 $user_stmt = oci_parse($conn, $user_query);
 
@@ -82,13 +57,13 @@ Modified by: rjw  on: 11/20/16
 
            <label for="user_choice"> Additional Surveyor:  </label>
            <select name="user_choice" id="user_choice">
-             <option value = "none">none</option>
              <?php
                   while (oci_fetch($user_stmt))
                   {
+                      $curr_user_initials = oci_result($user_stmt, "USER_INITIALS");
                       $curr_user_name = oci_result($user_stmt, "HSU_USERNAME");
                       ?>
-                      <option value = "<?= $curr_user_name ?>">
+                      <option value = "<?= $curr_user_initials ?>">
                         <?= $curr_user_name ?> </option>
 
                     <?php
@@ -100,16 +75,11 @@ Modified by: rjw  on: 11/20/16
                 ?>
              </select><br/>
 
-             <label for="start_time"> Start time: </label>
-             <div name="start_time" class="start_time">
-               <input type="number" name="start_time_hrs" value="12" min="1" max="12" required="required"  width="50%"> :
-               <input type="number" name="start_time_mins" value="30" min="00" max="59" required="required" width="50%" >
-             </div>
-
-             <input class="button" type="submit" name="new_reports_update" value="Continue"/>
-             <input class="button" type="submit" name="main_menu" value="Go Back" formnovalidate>
+             <div class="submit">
+             <input class="button" type="submit" name="main_menu" value="Go Back">
+             <input class="button" type="submit" name="report_recap" value="Continue"/>
+                </div>
           </fieldset>
-        </div>
         </form>
           <?php
       }

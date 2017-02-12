@@ -65,9 +65,16 @@ function create_map($login, $password)
         height: 100%;
       }
       html,body,.container-fluid{
-        height: 100%;
+        height: 98.2%;
         margin: 0;
         padding: 0;
+      }
+      input
+      {
+        border: none;
+        background-color: white;
+        position: relative;
+
       }
     </style>
   </head>
@@ -95,7 +102,8 @@ function create_map($login, $password)
 
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(latitudes[i], longitudes[i]),
-                map: map
+                map: map,
+                animation: google.maps.Animation.DROP
             });
 
             google.maps.event.addListener(marker, 'click', (function (marker, i) {

@@ -23,7 +23,7 @@ function display_existing_report_info($login, $password, $report)
 
     $conn = hsu_conn_sess($login, $password);
 
-    $report_query = 'SELECT REPORT_ID, START_TIME, END_TIME, REPORT_DATE, BEACH_NAME, SURVEY_SUMMARY '.
+    $report_query = 'SELECT REPORT_ID, START_TIME, END_TIME, TOTAL_TIME, REPORT_DATE, BEACH_NAME, SURVEY_SUMMARY '.
                   'FROM REPORTS, BEACHES '.
                   'WHERE REPORTS.BEACH_ABBR = BEACHES.BEACH_ABBR '.
                   'AND REPORT_ID = :REPORT';
@@ -46,7 +46,8 @@ function display_existing_report_info($login, $password, $report)
           Date : <?= oci_result($query_stmt, "REPORT_DATE"); ?> <br>
           Start Time: <?= oci_result($query_stmt, "START_TIME"); ?> <br>
           End Time: <?= oci_result($query_stmt, "END_TIME"); ?> <br>
-          Survey Summary: <?= oci_result($query_stmt, "SURVEY_SUMMARY"); ?> <br>
+          Total Time: <?= oci_result($query_stmt, "TOTAL_TIME"); ?> <br>
+          Survey Summary: <br> <?= oci_result($query_stmt, "SURVEY_SUMMARY"); ?> <br>
       </p>
 
      <?php
@@ -57,7 +58,7 @@ function display_existing_report_info($login, $password, $report)
                       'FROM REPORT_ENTRIES, SPECIES '.
                       'WHERE REPORT_ENTRIES.SPECIES_ABBR = SPECIES.SPEC_ABBR '.
                       'AND REPORT_ID = :REPORT';
-                      
+
      /* $entries_query = 'SELECT PRN, HSU_USERNAME, SPECIES_ABBR, COMMENTS '.
                       'FROM REPORT_ENTRIES '.
                       'WHERE REPORT_ID = :REPORT '; */

@@ -37,6 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title> MMERP </title>
+    <link rel="shortcut icon" href="whale-ico.png">
 
 
     <!-- required module files to launch app -->
@@ -81,52 +82,59 @@
         require_once('display_existing_report_info_user.php');
         require_once('display_existing_report_info_species.php');
         require_once('display_existing_report_info_beach.php');
-
     ?>
 
     <!-- css normalization  -->
     <link href="http://users.humboldt.edu/smtuttle/styles/normalize.css"
           type="text/css" rel="stylesheet" />
+
     <!-- initial bootstrap -->
     <link href="css_main/bootstrap.css"
           type="text/css" rel="stylesheet" />
     <link href="css_main/bootstrap-theme.css"
           type="text/css" rel="stylesheet" />
-    <link href="css_main/mmerp.css"
+    <link href="css_main/main.css"
           type="text/css" rel="stylesheet" />
-  <!--  <link href="custom.css" type="text/css"
-          rel="stylesheet" />
-  <script src="custom-session-validate.js" type="text/javascript"> </script> -->
+    <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+    <!--Link to font awesome  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 </head>
 
 <body>
-
+  <nav>
+    MMERP
+    <div class="user-actions">
+      <i class="fa fa-user" aria-hidden="true"></i>
+      <button type="submit" id="username_goes_here">Button</button>
+      <script>
+        var username = document.getElementById("username_goes_here");
+        username.innerHTML = "ats234";
+      </script>
+    </div>
+  </nav>
   <div class="container-fluid">
 
-  <header class="header">
-    <h1>MMERP</h1>
-  </header>
-
-
     <?php
-
-    /* if there is currently no username or next_screen variables in
-          the SESSION array, then display login module */
-    if((! array_key_exists("username", $_POST)) and
-        (! array_key_exists("next_screen", $_SESSION) or
-         (array_key_exists("logout",$_POST))))
-    {
-        db_login();
-        $_SESSION['next_screen'] = 'validate_user';
-
-    }
+    // /* if there is currently no username or next_screen variables in
+    //       the SESSION array, then display login module */
+    // if((! array_key_exists("username", $_POST)) and
+    //     (! array_key_exists("next_screen", $_SESSION) or
+    //      (array_key_exists("logout",$_POST))))
+    // {
+    //     db_login();
+    //     $_SESSION['next_screen'] = 'validate_user';
+    //
+    // }
 
     /* if username exists in the POST array, the users credintials must
        be vaidated in the the database.  The user types is_admin and is_surveyor
        will be added to the SESSION array at this point too if validation occurs
        in the function validate_user */
-    elseif (array_key_exists("username", $_POST) and
+
+    //used to be an else if block
+    if (array_key_exists("username", $_POST) and
             (($_SESSION['next_screen'] == 'validate_user')))
     {
         $username = strip_tags($_POST['username']);
@@ -159,18 +167,20 @@
         }
         else
         {
-            echo "Invalid username and/or password.<br>";
-            db_login();
+            // echo "Invalid username and/or password.<br>";
+            // notify the user about the incorrect password with red text
+            header( "Location: http://nrs-projects.humboldt.edu/~ats234/458Project/" );
+            ?>
 
+            <?php
             session_destroy();
             session_regenerate_id(TRUE);
             session_start();
 
             $_SESSION['next_screen'] = 'validate_user';
         }
-
-
     }
+
     /* if username exists POST array contains main_menu
        returning to main menu from later screens -->  display the main menu*/
     elseif  ((array_key_exists('main_menu', $_POST)) and
@@ -836,8 +846,7 @@
         the login module */
     else
     {
-        db_login();
-
+        header( "Location: http://nrs-projects.humboldt.edu/~ats234/458Project/" );
         session_destroy();
         session_regenerate_id(TRUE);
         session_start();

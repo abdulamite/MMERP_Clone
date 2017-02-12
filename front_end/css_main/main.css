@@ -1,5 +1,39 @@
 body {
   background-size: cover;
+  font-family: 'Montserrat', sans-serif;
+}
+.container-fluid
+{
+  width: 600px;
+  text-align: center;
+
+}
+input[type="submit"]
+{
+  color: #0D47A1;
+  border-color: #0D47A1;
+  border-style: solid;
+  height: 50px;
+  width: 200px;
+  margin: 1.5px;
+  margin-right:0px;
+  margin-left:0px;
+  background-color: #FFF;
+
+}
+select
+{
+  padding-left: 5px;
+  border: none;
+}
+
+input[type="number"]
+{
+  width: 43px;
+  text-align: left;
+  border: none;
+  padding-right: 5px;
+  margin-bottom: 10px;
 }
 fieldset
 {
@@ -8,15 +42,35 @@ fieldset
 
 nav{
   background-color: #0D47A1;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-top: .3em;
+  padding-bottom: .3em;
+  color: white;
+  font-size: 1.10em;
 }
-nav>button
+nav>.user-actions,button
 {
   float: right;
   background-color: #0D47A1;
-  color: white;
   border: none;
 }
-
+nav>p
+{
+  color:white;
+  font-weight: bold;
+  width: 50px;
+}
+input#latitude,input#longitude
+{
+  width: 200px;
+  margin-left: 10px;
+}
+legend
+{
+  margin-top:20px;
+  margin-bottom: 20px;
+}
 
 @media only screen
 and (min-device-width : 320px)

@@ -47,13 +47,13 @@ function report_summary($login, $password, $report_id)
 
              <label for="end_time"> End time: </label>
              <div name="end_time">
-               <input type="number" name="end_time_hrs" value="12" min="1" max="12" required="required"  width="50%"> :
+               <input type="number" name="end_time_hrs" value="12" min="1" max="24" required="required"  width="50%"> :
                <input type="number" name="end_time_mins" value="30" min="00" max="59" required="required" width="50%" >
             </div>
 
             <label for="total_time"> Total time taken in hours: </label>
             <div name="total_time">
-              <input type="number" name="total_time"  required="required"  width="50%">
+              <input type="number" name="total_time"  required="required" min="1" max="9" step="0.25" width="50%">
            </div>
 
            <legend>Report Summary</legend>

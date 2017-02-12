@@ -60,9 +60,9 @@ function get_report_entry_info($login, $password, $first_init, $second_init)
     <label for="coordinates">Coordinates:</label><br>
     <input type="checkbox" onclick="getLocation()" value="Use Current Location" />Use Current Location <br>
     Latitude:
-      <input type="text" name="latitude" id = "latitude" required><br>
+      <input type="text" name="latitude" id = "latitude" required="required" maxlength="9" ><br>
     Longitude:
-      <input type="text" name="longitude" id="longitude" required><br>
+      <input type="text" name="longitude" id="longitude" required="required" maxlength="9" ><br>
 
 
 
@@ -116,8 +116,14 @@ function get_report_entry_info($login, $password, $first_init, $second_init)
           }
       }
       function showPosition(position) {
-        lat.value = position.coords.latitude.toFixed(5);
-        long.value = position.coords.longitude.toFixed(5);
+        var lat = document.getElementById("latitude");
+        var long = document.getElementById("longitude");
+        var append_to_lat = Math.floor((Math.random() * 50) + 1);
+        var append_to_long = Math.floor((Math.random() * 50) + 1);
+        append_to_lat= append_to_lat.toString();
+        append_to_long = append_to_long.toString();;
+        lat.value = position.coords.latitude.toFixed(3).toString()+append_to_lat;
+        long.value = position.coords.longitude.toFixed(3).toString()+append_to_long;
       }
     </script>
 
